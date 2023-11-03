@@ -37,6 +37,7 @@ int main()
 
     // Validating Fragility
     if (Fragile != 'y' && Fragile != 'n') {
+        cout << endl;
         cout << "Invalid entry, exiting" << endl;
         cin.ignore();
         cin.get();
@@ -50,6 +51,7 @@ int main()
 
     // Validating Destination
     if (Destination != "usa" && Destination != "can" && Destination != "aus") {
+        cout << endl;
         cout << "Invalid entry, exiting" << endl;
         cin.ignore();
         cin.get();
