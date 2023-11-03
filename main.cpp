@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <string>
 #include <algorithm>
+#include <cmath>
 using namespace std;
 // Add any other header files here
 
@@ -33,10 +34,27 @@ int main()
     cin >> Item_Name;
     cout << "Is the item fragile? (y=yes/n=no)" << left << setw(16) << setfill('.') << right << ":";
     cin >> Fragile;
+
+    // Validating Fragility
+    if (Fragile != 'y' && Fragile != 'n') {
+        cout << "Invalid entry, exiting" << endl;
+        cin.ignore();
+        cin.get();
+        return 1;
+    }
+
     cout << "Please enter your order total." << left << setw(19) << setfill('.') << right << ":";
     cin >> Order_Total;
     cout << "Please enter destination. (usa/can/aus)" << left << setw(10) << setfill('.') << right << ":";
     cin >> Destination;
+
+    // Validating Destination
+    if (Destination != "usa" && Destination != "can" && Destination != "aus") {
+        cout << "Invalid entry, exiting" << endl;
+        cin.ignore();
+        cin.get();
+        return 1;
+    }
 
     // If Statements for Fragile Items
     if (Fragile == 'y')
