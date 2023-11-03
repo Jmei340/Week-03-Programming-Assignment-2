@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <algorithm>
 using namespace std;
 // Add any other header files here
 
@@ -12,22 +13,81 @@ using namespace std;
 int main()
 {
     // Declaring Variable
-    char Item_Name;
+    string Item_Name;
     char Fragile;
-    double Order_Total;
-    char Destination;
+    double Order_Total = 0.00;
+    string Destination;
+    double Fragile_Cost = 0.00;
+    double Shipping_Cost = 0.00;
+    double Total_Shipping = 0.00;
+
+    // Print Header
+    cout << "." << setw(48) << setfill('.') << right << "." << endl;
+    cout << " ITCS 2530 - Programming Assignment for week #3" << endl;
+    cout << "." << setw(48) << setfill('.') << right << "." << endl;
+    cout << endl;
+    cout << endl;
 
     // Getting Inputs
-    cout << "Please enter the item name. (No Spaces)" << left << setw(10) << setfill('.') << right << ":", cin >> Item_Name;
-    cout << "Is the item fragile? (y=yes/n=no)" << left << setw(16) << setfill('.') << right << ":", cin >> Fragile;
-    cout << "Please enter your order total." << left << setw(19) << setfill('.') << right << ":", cin >> Order_Total;
-    cout << "Please enter destination. (usa/can/aus)" << left << setw(10) << setfill('.') << right << ":", cin >> Destination;
+    cout << "Please enter the item name. (No Spaces)" << left << setw(10) << setfill('.') << right << ":";
+    cin >> Item_Name;
+    cout << "Is the item fragile? (y=yes/n=no)" << left << setw(16) << setfill('.') << right << ":";
+    cin >> Fragile;
+    cout << "Please enter your order total." << left << setw(19) << setfill('.') << right << ":";
+    cin >> Order_Total;
+    cout << "Please enter destination. (usa/can/aus)" << left << setw(10) << setfill('.') << right << ":";
+    cin >> Destination;
 
-    // If Statements
+    // If Statements for Fragile Items
+    if (Fragile == 'y')
+        Fragile_Cost = 2.00;
+    else if (Fragile == 'n')
+        Fragile_Cost = 0.00;
 
+    // If Statements for Shipping Cost
+    if (Order_Total <= 50) {
+        if (Destination == "usa")
+            Shipping_Cost = 6.00 + Fragile_Cost;
+        else if (Destination == "can")
+            Shipping_Cost = 8.00 + Fragile_Cost;
+        else if (Destination == "aus")
+            Shipping_Cost = 10.00 + Fragile_Cost;
+    }
+    else if (Order_Total <= 100) {
+        if (Destination == "usa")
+            Shipping_Cost = 9.00 + Fragile_Cost;
+        else if (Destination == "can")
+            Shipping_Cost = 12.00 + Fragile_Cost;
+        else if (Destination == "aus")
+            Shipping_Cost = 14.00 + Fragile_Cost;
+    }
+    else if (Order_Total <= 150) {
+        if (Destination == "usa")
+            Shipping_Cost = 12.00 + Fragile_Cost;
+        else if (Destination == "can")
+            Shipping_Cost = 15.00 + Fragile_Cost;
+        else if (Destination == "aus")
+            Shipping_Cost = 17.00 + Fragile_Cost;
+    }
+    else {
+        Shipping_Cost = 0.00 + Fragile_Cost;
+    }
+
+    // Calculations
+    Total_Shipping = Order_Total + Shipping_Cost;
+
+    // Uppercasing Destination and Item name
+    transform(Item_Name.begin(), Item_Name.end(), Item_Name.begin(), ::toupper);
+    transform(Destination.begin(), Destination.end(), Destination.begin(), ::toupper);
 
     // Outputs
-
+    cout << endl;
+    cout << "Your item is" << left << setw(28) << setfill('.') << ".", cout << Item_Name << endl;
+    cout << "Your shipping cost is" << left << setw(20) << setfill('.') << right << "$" << setprecision(2) << fixed << Shipping_Cost << endl;
+    cout << "You are shipping to" << left << setw(21) << setfill('.') << ".", cout << Destination << endl;
+    cout << "Your total shipping cost are" << left << setw(13) << setfill('.') << right << "$" << setprecision(2) << fixed << Total_Shipping << endl;
+    cout << endl;
+    cout << "-" << setw(49) << setfill('-') << right << "Thank You!" << endl;
 
     return 0;
 }
